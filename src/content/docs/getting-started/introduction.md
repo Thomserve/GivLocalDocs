@@ -17,6 +17,7 @@ GivLocal communicates directly with your GivEnergy hardware over your home netwo
 - Set charge and discharge schedules with target SOC levels
 - Adjust inverter settings including power limits and battery reserve
 - Discover all compatible devices on your network automatically
+- Open the built-in User Manual from Settings → User Manual for step-by-step help
 
 ## What you don't need
 
