@@ -23,4 +23,4 @@ Open GivLocal, tap **Devices**, and let the app discover your hardware automatic
 
 ## Something missing?
 
-If you have GivEnergy hardware that isn't working with GivLocal, please [open an issue on GitHub](https://github.com/Thomserve/GivLocalApp/issues) or email [support@givlocal.app](mailto:support@givlocal.app).
+If you have GivEnergy hardware that isn't working with GivLocal, please visit the [documentation](https://docs.givlocal.app), [open an issue on GitHub](https://github.com/Thomserve/GivLocalApp/issues), or email [support@givlocal.app](mailto:support@givlocal.app).

@@ -23,7 +23,7 @@ Lists active and historical faults reported by the inverter. Faults can be revie
 
 ## Write Log
 
-A timestamped record of every setting written to the inverter from GivLocal. Each entry shows the register address, the value written, and the time. The log can be searched, filtered by date, and exported.
+A timestamped record of every setting written to the inverter from GivLocal. Each entry shows the register address, the value written, and the time. The log can be searched, filtered by date or register number, and exported.
 
 Useful for verifying that changes were applied, or for diagnosing unexpected behaviour after a settings change.
 
@@ -40,18 +40,20 @@ Displays raw register values from the inverter in real time, grouped into catego
 
 | Setting | Description |
 |---------|-------------|
-| Eco Mode | When enabled, the inverter automatically manages charge and discharge based on tariff and usage |
-| Pause Start / End | Time window during which the battery is held at its current SOC |
-| Pause Mode | Whether to pause charging, discharging, or both during the pause window |
-| Battery Reserve | Minimum SOC the inverter will discharge to |
+| Eco Mode | When enabled, the inverter automatically manages charge and discharge based on schedule and conditions. For most users this should stay on. |
+| Battery Reserve | Minimum SOC the inverter will discharge to under normal operation (4–100%). Increase this to keep charge in reserve for a power cut. |
+| Pause Start / End | Time window during which the battery is held |
+| Pause Mode | Not Paused, Pause Charge, Pause Discharge, or Pause Charge & Discharge |
 
 ## Power Limits
 
 | Setting | Description |
 |---------|-------------|
-| Active Power Rate | Overall inverter output as a percentage of maximum (%) |
-| Charge Power Limit | Maximum battery charge rate (kW) |
-| Discharge Power Limit | Maximum battery discharge rate (kW) |
+| Active Power Rate | Overall inverter output as a percentage of its rated capacity (%). Reduce to cap output for export limiting or grid compliance. |
+| Charge Power Limit | Maximum battery charge rate in watts. Setting to 0 disables battery charging entirely. |
+| Discharge Power Limit | Maximum battery discharge rate in watts. |
+
+The maximum values available on these sliders reflect your inverter's hardware specifications and battery configuration.
 
 <Aside type="tip">
   If **Use Max Power for Quick Charge/Discharge** is enabled in App Settings, these limits are temporarily overridden when you tap Charge Now or Discharge Now.
@@ -63,28 +65,39 @@ Available on EMS devices only.
 
 | Setting | Description |
 |---------|-------------|
-| Export Power Limit | Caps the power exported to the grid |
-| Plant Charge Compensation | Adjusts the target charge power at the plant level |
-| Plant Discharge Compensation | Adjusts the target discharge power at the plant level |
+| Plant Charge Compensation | Fine-tune the charge target by a small offset (±5 W) to account for measurement differences between the EMS and individual inverters |
+| Plant Discharge Compensation | Fine-tune the discharge target by a small offset (±5 W) |
 
 ## Clock
 
-Displays and allows correction of the inverter's internal clock. An incorrect clock can cause schedules to run at the wrong time.
+Displays your phone's current time alongside the inverter's internal clock. Tap **Sync** to write your phone's time to the inverter. Keeping the inverter clock accurate matters for schedule execution.
+
+**Automatic skew detection** — when the app connects, it compares the inverter clock against the phone time. If the difference exceeds two minutes, a prompt appears asking whether to sync. The prompt appears at most once per day.
 
 ## Advanced
 
-**Real-Time Control (RTC)** — enables or disables the inverter's real-time control mode. Only available on supported devices and firmware versions.
+**Export Power Priority** — controls what the inverter prioritises when generating excess power:
+
+| Value | Behaviour |
+|-------|-----------|
+| 0 — PV First | Solar goes to loads before anything else |
+| 1 — Load First | Loads are satisfied first, then battery, then export |
+| 2 — Battery First | Battery is charged before exporting |
+
+**Battery SOC Calibration** — if your battery state of charge reading has drifted, you can run a calibration cycle here. Choose **Full** (charge to 100% then discharge) or **Charge Only** (charge to 100%), then tap **Start**. Tap **Stop** when complete. This is a slow process that can take many hours.
+
+**Real-Time Control (RTC)** — enables or disables real-time control mode. Only available on supported devices and firmware versions.
 
 <Aside type="caution">
-  Only change RTC mode if you understand its implications. Consult your installer if unsure.
+  Only change RTC mode if you understand its implications.
 </Aside>
 
 ## Grid Compliance
 
 | Setting | Description |
 |---------|-------------|
-| EPS Mode | Enables Emergency Power Supply (off-grid backup) mode |
-| Zero Second EPS Changeover | Enables near-instantaneous switchover to EPS on grid loss |
+| EPS Mode | Enables Emergency Power Supply (off-grid backup) mode. Only appears on supported inverters. |
+| Zero Second EPS Changeover | Enables near-instantaneous switchover to battery during an outage rather than the standard brief interruption |
 
 <Aside type="caution">
   EPS settings affect how your system behaves during a power cut. Do not change these without understanding the impact on your installation.
@@ -92,30 +105,70 @@ Displays and allows correction of the inverter's internal clock. An incorrect cl
 
 ## Service
 
-Restart options for your hardware. Available options depend on device type:
+**Restore Defaults** — writes a fixed set of values directly to the inverter's holding registers, returning operational settings to a known baseline. Useful after testing or after a quick action has left the inverter in a non-standard state.
 
-| Action | Description |
-|--------|-------------|
-| Restart Gateway | Restarts the gateway only |
-| Restart AIOs | Restarts all connected All-In-One units |
-| Restart All | Restarts the gateway and all AIOs |
-| Restart Inverter | Restarts the inverter (non-gateway setups) |
+Values written on restore:
 
-<Aside type="caution">
-  Restarting hardware interrupts monitoring and may briefly affect your system's operation.
+| Setting | Reset value |
+|---------|-------------|
+| Eco Mode | Enabled |
+| Charge schedule enabled | Off |
+| Discharge schedule enabled | Off |
+| Battery Reserve | 4% |
+| Active Power Rate | 100% |
+| Battery Pause Mode | Not Paused |
+| Battery SOC Calibration | Reset |
+
+Power limits are reset differently by type:
+
+| Inverter type | Charge Power Limit | Discharge Power Limit |
+|---------------|-------------------|----------------------|
+| Hybrid / All-in-One / EMS | 50% | 50% |
+| Gateway / AC-Coupled | 100% | 100% |
+
+<Aside type="note">
+  Restore Defaults clears the schedule **enable flags** but does not touch slot times or target SOC values stored in the Schedules tab. Your configured charge and discharge windows remain on the inverter — they are just disabled. Re-enable them from the Schedules tab when you are ready.
 </Aside>
 
-## Installer
+**Corrupt slot detection** — after applying defaults, the app reads back all slots. If any contain an invalid time value (a known firmware quirk where minutes is set to 60), the app automatically clears those slots and logs the action.
 
-A dedicated section for commissioning and service settings intended for qualified installers. Protected separately from everyday user controls.
+**Restart Inverter** — sends a software restart command. The inverter will briefly go offline.
+
+**Restart Hardware** *(Gateway systems only)* — separate options to restart the Gateway, connected AIOs individually, or everything at once.
 
 <Aside type="caution">
-  Incorrect changes in the Installer section can affect system operation. Only access this under instruction from your installer or GivEnergy support.
+  Restarting hardware interrupts monitoring and may briefly affect loads the inverter is powering.
 </Aside>
 
-## Diagnostics (register reader)
+## Commissioning *(Installer tier)*
 
-A low-level tool that reads raw register values directly from the inverter by address. Useful for advanced diagnostics or verifying that a value was written correctly.
+This section requires the [Installer tier](/pro/) and covers settings typically configured once during installation. A confirmation prompt appears before any write is sent. This can be disabled in **Settings → Diagnostics → Confirm Commissioning Writes**.
+
+| Setting | Description |
+|---------|-------------|
+| Grid Code | Grid compliance standard for your country/region (0–29) |
+| Meter Type | CT clamps or energy meter (EM418/EM115) |
+| Battery Type | Lead Acid or Lithium-ion |
+| Battery Capacity | Total battery capacity in amp-hours |
+| Auto Read BMS | Whether the inverter reads SOC directly from the BMS |
+| PV Startup Voltage | Voltage at which the inverter begins accepting solar input |
+| Grid Export Limit | Maximum export power in watts |
+| Grid Import Current Limit | Maximum import current in amps |
+| PV Input Mode | Independent Strings (separate MPPT per string) or Combined |
+| CT Direction | Flip the CT clamp reading if it's showing negative when it should be positive |
+| Force Off Grid | Isolates the inverter from the grid — use with care |
+
+## Diagnostics
+
+Tools for troubleshooting. None of these change inverter settings.
+
+**Register Reader** — read a specific register by address and slave ID. Choose Input Register (IR) or Holding Register (HR), enter the address, and tap Read. The raw value is shown immediately.
+
+**Register Dump** — reads every register on the inverter and saves the result to a file. Useful when reporting a problem or comparing states before and after a change.
+
+**Plant Dump** — like Register Dump, but covers all inverters in a multi-inverter plant.
+
+**Register Sweep** — scans all registers and lists only those with non-zero values. A quicker way to find active or changed registers without wading through the full dump.
 
 ## Screenshots needed
 - Inverter overview section
@@ -123,5 +176,7 @@ A low-level tool that reads raw register values directly from the inverter by ad
 - Live Telemetry screen
 - Battery Control section expanded
 - Power Limits section expanded
+- Advanced section (Export Power Priority, Battery SOC Calibration)
 - EMS Controls section (EMS device only)
-- Service section showing restart options
+- Service section (Restore Defaults + restart options)
+- Commissioning section (Installer tier)

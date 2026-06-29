@@ -60,6 +60,10 @@ export default defineConfig({
                     label: 'Supported Devices',
                     slug: 'supported-devices',
                 },
+                {
+                    label: 'Pro & Installer',
+                    slug: 'pro',
+                },
             ],
             customCss: ['./src/styles/custom.css'],
         }),

@@ -12,7 +12,7 @@ Open **Settings → Connection** to control how often GivLocal fetches data and 
 | Live Data Refresh | How often the Dashboard updates (power flow, battery SOC, quick stats) | 10 seconds |
 | Full Telemetry Refresh | How often the slower, more detailed register read runs | Longer interval |
 
-Live data refresh can be set between 10 and 120 seconds. A shorter interval gives more responsive readings but generates more network traffic to the inverter.
+Live data refresh can be set between **10 and 120 seconds** in steps of 10. A shorter interval gives more responsive readings but generates more network traffic to the inverter.
 
 ## Polling method
 
@@ -36,4 +36,4 @@ If you are unsure which method to use, run the **Connection Benchmark** tool in 
 When enabled, quick actions use the maximum hardware-supported power rate rather than your configured power limit. The limit is restored when the quick action ends.
 
 ## Screenshots needed
-- Settings > Connection screen
+- Settings > Connection screen showing refresh intervals and polling method

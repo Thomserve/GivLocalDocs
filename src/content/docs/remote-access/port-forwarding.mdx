@@ -6,23 +6,27 @@ description: Using port forwarding for remote access to your GivEnergy system.
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="caution">
-  Exposing Modbus TCP directly to the internet is a security risk. Only do this if you understand the implications and have appropriate firewall rules in place. Tailscale is recommended instead.
+  Modbus TCP has no built-in authentication. Exposing inverter ports directly to the internet is a security risk. Only do this if you understand the implications and have appropriate firewall rules in place. [Tailscale](/remote-access/tailscale/) is the recommended alternative.
 </Aside>
 
-Port forwarding lets you reach your inverter's Modbus TCP port from outside your home network by mapping an external port on your router to the inverter's internal IP.
+Port forwarding lets you reach your inverter from outside your home network by mapping an external port on your router to the inverter's internal address.
 
 - Inverters use port **8899**
 - EV Chargers use port **502**
+
+Port forwarding requires **GivLocal Pro**.
 
 ## Setup
 
 1. Assign your inverter a static IP or DHCP reservation in your router
 2. In your router's port forwarding settings, forward an external port to your inverter's internal IP on port `8899` (or `502` for the EV Charger)
-3. Find your home's external IP address (or use a dynamic DNS service)
-4. In GivLocal, use the **Manual Connection** option and enter `<your-external-ip>:<forwarded-port>`
+3. Find your home's external IP address, or set up a dynamic DNS service for a stable hostname
+4. Enable **Port Forwarding** in **Settings → Remote Access**
+5. In GivLocal, long-press your device and tap **Edit**, then enter the remote address (e.g. `myinverter.example.com:18899`) in the Remote Address field
 
-## Security considerations
+The app uses the local connection when your phone is on your home network, and automatically falls back to the remote address when it can't reach the local IP.
 
-- Modbus TCP has no built-in authentication
+## Security
+
 - Restrict access using your router's firewall to only allow connections from known IP addresses
-- Consider using a VPN (such as Tailscale) instead
+- Consider using a VPN ([Tailscale](/remote-access/tailscale/)) instead — it requires no open ports

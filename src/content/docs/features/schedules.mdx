@@ -5,7 +5,11 @@ description: Setting up charge and discharge time slots.
 
 import { Aside } from '@astrojs/starlight/components';
 
-The Schedules screen lets you configure time windows for automatic charging and discharging. The number of available slots depends on your device type.
+<Aside>
+  Schedules require **GivLocal Pro**.
+</Aside>
+
+The Schedules tab lets you set time windows for automatic charging and discharging. Schedules are written directly to the inverter and run independently of the app — your phone doesn't need to be nearby for them to work.
 
 ## Slot limits by device
 
@@ -29,30 +33,33 @@ The Schedules screen lets you configure time windows for automatic charging and 
   Legacy Hybrid Gen 3 devices with ARM firmware version above 302 support up to 10 charge and discharge slots.
 </Aside>
 
+The Schedules tab shows only the slots your specific inverter supports — you won't see options that don't apply to your hardware.
+
 ## Charge slots
 
-Each charge slot defines a time window during which the battery will charge, with an optional target SOC level to charge to.
+Each charge slot has a start time, end time, and a target state of charge. During the slot the inverter will charge the battery from the grid (if solar isn't sufficient) until it reaches that target.
 
-- Each slot has a start time, end time, and target SOC (%)
-- The schedule must be **enabled** using the toggle at the top of the screen for slots to run
+**AC Charge Enable** — some inverters have a master switch that enables or disables charging from the grid entirely, separate from individual slot settings. If your inverter supports this, a toggle appears at the top of the Charge Slots section.
 
 **Example use case:** charge from grid during cheap overnight tariff hours (e.g. Octopus Go, Agile off-peak).
 
 ## Discharge slots
 
-Each discharge slot defines a time window during which the battery will discharge to home, with a lower SOC cutoff to prevent over-discharge.
-
-- Each slot has a start time, end time, and lower SOC cutoff (%)
-- The discharge schedule must also be **enabled** to run
+Each discharge slot has a start time, end time, and a lower SOC floor. The inverter will discharge the battery during that period but won't go below the floor you've set.
 
 **Example use case:** discharge during peak tariff hours to reduce import costs.
 
+## Export slots *(EMS only)*
+
+EMS devices have a third section for **Export Slots**, controlling when surplus power is pushed to the grid. These follow the same structure as charge and discharge slots.
+
 ## Managing slots
 
-- Tap **+ Add slot** to create a new slot
-- Tap the **›** arrow on a slot to edit it
-- Swipe left or tap the 🗑 icon to delete a slot
+- Tap **+** to add a slot
+- Tap an existing slot to edit it
+- Tap the toggle on the left of a slot to enable or disable it without deleting it
+- Swipe left to delete a slot
 
 <Aside type="tip">
-  Slots are written directly to the inverter over Modbus TCP. Changes take effect immediately without needing to restart anything.
+  You can disable a slot temporarily using its toggle rather than deleting it. The time and SOC values are preserved on the inverter and re-enabled when you toggle it back on.
 </Aside>
