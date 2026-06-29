@@ -1,0 +1,59 @@
+---
+title: Diagnostics & Advanced
+description: Advanced connection diagnostics and troubleshooting tools.
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Open **Settings → Diagnostics** for tools to diagnose connection problems and tune how GivLocal communicates with your hardware.
+
+## Connection Benchmark
+
+Tests each available connection method against your inverter and recommends the best one for your hardware and network.
+
+<Steps>
+1. Open **Settings → Diagnostics → Connection Benchmark**
+2. Tap **Run Benchmark**
+3. GivLocal will test each method in turn
+4. The recommended method is highlighted — tap **Apply** to use it
+</Steps>
+
+Previous benchmark results are shown so you can compare across sessions.
+
+## Inverter Method
+
+Selects the connection strategy GivLocal uses to communicate with your inverter. Method 3 is the default and works for most devices. If you experience connection issues, run the Connection Benchmark to find the best method for your setup.
+
+## Verbose Frame Logging
+
+When enabled, GivLocal captures the raw bytes sent and received in each communication with the inverter. This is primarily useful for bug reports or diagnosing unusual behaviour.
+
+<Aside type="caution">
+  Verbose Frame Logging generates large amounts of data quickly. Disable it once you have captured the information you need.
+</Aside>
+
+## Confirm Writes
+
+When enabled, GivLocal shows a confirmation prompt before writing any setting to the inverter. This adds a safety step to prevent accidental changes.
+
+A separate **Confirm Commissioning Writes** toggle applies the same protection to settings in the Installer / Commissioning section.
+
+## Battery Diagnostics
+
+**Show Calculated State of Health** — displays a calculated battery health percentage on the battery cell detail sheet, when BMS capacity data is available from the inverter.
+
+## Debug Log
+
+GivLocal maintains an internal debug log that can be exported for troubleshooting. Use **Export Log** to share it, or **Clear Log** to reset it.
+
+## Reset App Defaults
+
+<Aside type="caution">
+  This clears all settings, saved devices, and cached data. Use as a last resort when the app is in an unrecoverable state.
+</Aside>
+
+**Settings → Reset App Defaults** wipes all preferences and returns GivLocal to a clean state, as if freshly installed.
+
+## Screenshots needed
+- Settings > Diagnostics screen
+- Connection Benchmark results screen

@@ -1,0 +1,68 @@
+---
+title: EV Charger
+description: Monitoring and controlling your GivEnergy EV Charger from GivLocal.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+GivLocal supports the GivEnergy EV Charger via two connection methods. Once connected, the charger appears on the Dashboard alongside your inverter and batteries.
+
+## Connection methods
+
+**Modbus TCP (direct)** — GivLocal connects directly to the charger on port 502 over your local network. The charger must be on the same network and reachable by IP.
+
+**OCPP (via server)** — GivLocal connects to an OCPP server (such as Home Assistant with the GivEnergy EVC integration, or a local OCPP proxy) which relays commands to the charger.
+
+## Status card
+
+The EV Charger status card on the Dashboard shows:
+
+- Current charging state
+- Connection status (Unplugged / Plugged In)
+- Active error codes (if any)
+
+### Charging states
+
+| State | Description |
+|-------|-------------|
+| Idle | Charger is ready, no vehicle connected |
+| Plugged In | Vehicle connected, not yet charging |
+| Starting | Charge session initialising |
+| Charging | Actively charging |
+| Scheduled | Waiting for a scheduled charge window |
+| End of Charging | Session completed |
+| Startup Failure | Charger failed to start a session |
+| System Failure | Hardware or communication fault |
+| Updating | Firmware update in progress |
+| Unstable CP | Control pilot signal issue |
+| Waiting | Waiting for conditions to be met |
+
+### Error codes
+
+GivLocal displays error codes reported by the charger including CP voltage faults, emergency stop, under/overvoltage, overtemperature, and others. If an error code is shown, consult the GivEnergy EV Charger documentation or contact your installer.
+
+## Controls
+
+The EV Charger controls card provides:
+
+| Control | Description |
+|---------|-------------|
+| Current Limit | Slider to set the maximum charge current (A) |
+| Plug & Go | Automatically start charging when a vehicle is plugged in |
+| Front Panel LEDs | Enable or disable the charger's status LEDs |
+| Max Import Capacity | Cap the total import power to avoid exceeding your supply limit |
+| Randomised Delay | Add a random delay at session start for load balancing across multiple chargers |
+| Suspended Timeout | How long to wait before suspending an inactive session |
+
+## Schedules
+
+The EV Charger has its own schedule card, separate from the inverter charge/discharge schedules. Use this to set time windows for automatic charging — for example, to charge overnight on a cheaper tariff.
+
+<Aside type="tip">
+  If you use Octopus Intelligent or another smart tariff with built-in scheduling, you may not need to configure EV charger schedules manually.
+</Aside>
+
+## Screenshots needed
+- EV Charger status card on Dashboard
+- EV Charger controls card
+- EV Charger schedule card

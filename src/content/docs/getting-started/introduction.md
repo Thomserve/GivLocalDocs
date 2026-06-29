@@ -7,7 +7,7 @@ GivLocal is a mobile app for iOS and Android that lets you monitor and control y
 
 ## How it works
 
-GivLocal communicates with your GivEnergy hardware using **Modbus TCP** — the same protocol used by professional energy management tools. Your phone connects directly to your inverter or gateway over Wi-Fi, so everything stays on your local network.
+GivLocal communicates directly with your GivEnergy hardware over your home network. GivEnergy devices expose a Modbus-based interface on port 8899 (inverters and gateways) or port 502 (EV Charger), which GivLocal uses to read live data and write settings. Your phone talks directly to the hardware over Wi-Fi — no intermediary, no cloud.
 
 ## What you can do
 

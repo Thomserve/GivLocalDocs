@@ -3,19 +3,18 @@ title: Supported Devices
 description: GivEnergy hardware compatible with GivLocal.
 ---
 
-GivLocal supports a wide range of GivEnergy hardware, discovered automatically over your local network via Modbus TCP.
+GivLocal supports a wide range of GivEnergy hardware, discovered automatically over your local network.
 
 ## Supported hardware
 
 | Device | Notes |
 |--------|-------|
-| **Gateway** | Manages multiple batteries from a single connection point |
-| **All In One (AIO)** | Full support — per-unit stats, battery cell detail, charge & discharge history |
-| **Hybrid Inverter GEN1 & GEN2** | Full schedule and settings access |
-| **Hybrid Inverter GEN3** | Full schedule and settings access |
-| **HV Battery** | High-voltage systems with SOC monitoring, cell detail, and charge/discharge control |
-| **AC-Coupled Inverter** | Full support alongside existing solar setups |
-| **EMS** | Energy Management System devices with whole-home energy monitoring |
+| **Gateway** | Gen 1 and Gen 2 |
+| **All In One (AIO)** | Gen 1 and Gen 2 |
+| **Hybrid Inverters** | Gen 1, Gen 2 and Gen 3 |
+| **AC-Coupled Inverter** | |
+| **EMS** | Energy Management System devices with child device monitoring and control |
+| **Three Phase Inverter** | LV and HV variants |
 | **EV Charger** | Modbus TCP for direct local control, or OCPP via Home Assistant or a local OCPP server |
 
 ## Not sure what you have?

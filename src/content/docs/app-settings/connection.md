@@ -1,0 +1,39 @@
+---
+title: Connection & Polling
+description: Configuring how GivLocal connects to and polls your inverter.
+---
+
+Open **Settings → Connection** to control how often GivLocal fetches data and how it communicates with your hardware.
+
+## Refresh intervals
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| Live Data Refresh | How often the Dashboard updates (power flow, battery SOC, quick stats) | 10 seconds |
+| Full Telemetry Refresh | How often the slower, more detailed register read runs | Longer interval |
+
+Live data refresh can be set between 10 and 120 seconds. A shorter interval gives more responsive readings but generates more network traffic to the inverter.
+
+## Polling method
+
+Controls how GivLocal reads data from the inverter:
+
+| Method | Description |
+|--------|-------------|
+| Default | Splits live data and detail reads into separate passes. Recommended for most setups. |
+| Full Telemetry | Reads all data in a single pass. Useful for diagnostics but slower. |
+| Battery Meter | Polling optimised for battery meter-style monitoring. |
+
+If you are unsure which method to use, run the **Connection Benchmark** tool in **Settings → Diagnostics** — it tests each method against your hardware and recommends the best fit.
+
+## Quick Actions power settings
+
+| Setting | Description |
+|---------|-------------|
+| Use Max Power for Quick Charge | Temporarily raises the battery charge power limit when Charge Now is tapped |
+| Use Max Power for Quick Discharge | Temporarily raises the battery discharge power limit when Discharge Now is tapped |
+
+When enabled, quick actions use the maximum hardware-supported power rate rather than your configured power limit. The limit is restored when the quick action ends.
+
+## Screenshots needed
+- Settings > Connection screen

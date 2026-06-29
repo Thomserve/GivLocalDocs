@@ -7,7 +7,7 @@ export default defineConfig({
     integrations: [
         starlight({
             title: 'GivLocal',
-            description: 'Local control for your GivEnergy system — no cloud required.',
+            description: 'Local control for your GivEnergy system - no cloud required.',
             logo: {
                 src: './src/assets/icon.png',
                 replacesTitle: false,
@@ -31,8 +31,20 @@ export default defineConfig({
                         { label: 'Live Power Flow', slug: 'features/power-flow' },
                         { label: 'Energy Stats', slug: 'features/energy-stats' },
                         { label: 'Battery Management', slug: 'features/battery-management' },
+                        { label: 'Battery Cell Details', slug: 'features/battery-cell-details' },
                         { label: 'Schedules', slug: 'features/schedules' },
+                        { label: 'EV Charger', slug: 'features/ev-charger' },
                         { label: 'Inverter Settings', slug: 'features/inverter-settings' },
+                        { label: 'Fault Log', slug: 'features/fault-log' },
+                    ],
+                },
+                {
+                    label: 'App Settings',
+                    items: [
+                        { label: 'Appearance & Theme', slug: 'app-settings/appearance' },
+                        { label: 'Dashboard', slug: 'app-settings/dashboard' },
+                        { label: 'Connection & Polling', slug: 'app-settings/connection' },
+                        { label: 'Diagnostics & Advanced', slug: 'app-settings/diagnostics' },
                     ],
                 },
                 {
@@ -40,6 +52,7 @@ export default defineConfig({
                     items: [
                         { label: 'Overview', slug: 'remote-access/overview' },
                         { label: 'Tailscale', slug: 'remote-access/tailscale' },
+                        { label: 'Automatic Wi-Fi Switching', slug: 'remote-access/automatic-switching' },
                         { label: 'Port Forwarding', slug: 'remote-access/port-forwarding' },
                     ],
                 },

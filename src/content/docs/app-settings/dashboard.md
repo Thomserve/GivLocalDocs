@@ -1,0 +1,38 @@
+---
+title: Dashboard Settings
+description: Customising the behaviour and display of the Dashboard.
+---
+
+Open **Settings → Dashboard** to customise how the Dashboard looks and behaves.
+
+## Options
+
+### Power-based Speed
+When enabled, the animated dots on the power flow diagram move faster when more power is flowing. Gives a more intuitive sense of how much energy is being moved. Enabled by default.
+
+### Hide Solar
+Hides the solar orb from the power flow card. Useful if you don't have solar panels and want a cleaner layout.
+
+### Smart Switch Labels
+Controls what is shown on the device tabs at the top of the Dashboard:
+
+| Mode | Description |
+|------|-------------|
+| Name | Shows the device type (e.g. Gateway, All In One) |
+| Serial | Shows the device serial number |
+| Both | Shows name and serial number |
+
+### Average Plant SOC
+When enabled, the SOC shown on the power flow diagram uses the average state of charge across all visible batteries, rather than the highest. Useful for multi-battery systems where you want an overall picture.
+
+### Enable GivTCP-style battery card
+Adds an optional battery summary card in the style used by GivTCP, showing capacity, charge/discharge totals, and timing estimates on a single card. Swipe the battery card area on the Dashboard to access it.
+
+### Fault Alert Banners
+When enabled, a banner is displayed on the Dashboard whenever an inverter fault is detected. See [Fault Log](/features/fault-log/) for more detail.
+
+### Haptic Feedback
+Vibrates the device when a command is sent to the inverter or charger (e.g. Charge Now, Discharge Now). Can be disabled if you find the vibration distracting.
+
+## Screenshots needed
+- Settings > Dashboard showing all options

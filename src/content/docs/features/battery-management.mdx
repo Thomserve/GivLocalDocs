@@ -11,9 +11,9 @@ GivLocal gives you direct control over your battery's charge and discharge behav
 
 From the Dashboard, three buttons let you override the current mode immediately:
 
-- **Charge Now** — charges the battery as fast as possible (up to the configured charge power limit)
-- **Discharge Now** — discharges the battery to home (up to the configured discharge power limit)
-- **Pause** — holds the battery at its current state of charge
+- **Charge Now** - charges the battery as fast as possible (up to the configured charge power limit)
+- **Discharge Now** - discharges the battery to home (up to the configured discharge power limit)
+- **Pause** - holds the battery at its current state of charge
 
 <Aside type="caution">
   Quick actions override active schedules until the next scheduled event or until you cancel them manually.
@@ -36,3 +36,11 @@ The battery reserve sets the minimum SOC the inverter will discharge to. Configu
 ## Eco Mode
 
 When Eco Mode is enabled, the inverter automatically manages charging and discharging based on your tariff and usage patterns. Configure it in **Inverter → Battery Control**.
+
+## Max power for quick actions
+
+By default, Charge Now and Discharge Now use your configured power limits. You can optionally allow quick actions to temporarily override these limits and use the maximum hardware-supported power rate. Enable this in **Settings → Connection → Use Max Power for Quick Charge / Use Max Power for Quick Discharge**.
+
+## Battery cell details
+
+Tap the battery card to open a detailed view showing per-cell voltages, temperatures, and (where available) a calculated State of Health. See [Battery Cell Details](/features/battery-cell-details/) for more.

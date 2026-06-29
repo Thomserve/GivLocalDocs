@@ -1,0 +1,35 @@
+---
+title: Automatic Wi-Fi Switching
+description: Automatically switching between local and Tailscale connections based on your Wi-Fi network.
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+GivLocal can automatically switch between your local network connection and Tailscale depending on which Wi-Fi network your phone is connected to. When you're at home it connects directly; when you're away it routes through Tailscale.
+
+<Aside type="note">
+  This feature requires Tailscale to be set up first. See the [Tailscale guide](/remote-access/tailscale/).
+</Aside>
+
+## How it works
+
+You register your home Wi-Fi network(s) in GivLocal. When your phone is connected to a known network, GivLocal connects to your inverter directly using the local IP. When on any other network, it connects via Tailscale automatically — no manual switching needed.
+
+<Aside type="note">
+  Automatic switching requires the Location permission on iOS, which is used to detect the current Wi-Fi SSID. No location data is stored or transmitted.
+</Aside>
+
+## Setup
+
+<Steps>
+1. Open **Settings → Remote Access → Automatic Switching**
+2. Grant the Location permission if prompted
+3. Tap **Add Current Wi-Fi** to register your home network, or tap **Add Manually** to enter an SSID by name
+4. Your registered networks are listed with the option to remove them individually
+5. Toggle **Automatic Switching** on
+</Steps>
+
+Once enabled, GivLocal handles the switch transparently whenever you move between networks.
+
+## Screenshots needed
+- Settings > Remote Access > Automatic Switching screen

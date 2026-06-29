@@ -9,7 +9,7 @@ By default, GivLocal only works when your phone is on the same network as your i
 
 | Method | Difficulty | Security |
 |--------|-----------|----------|
-| [Tailscale](/remote-access/tailscale/) | Easy | Excellent — encrypted mesh VPN |
+| [Tailscale](/remote-access/tailscale/) | Easy | Excellent - encrypted mesh VPN |
 | [Port Forwarding](/remote-access/port-forwarding/) | Moderate | Your responsibility to secure |
 
 **Tailscale is strongly recommended** for most users. It requires no router configuration, works through NAT, and encrypts all traffic.

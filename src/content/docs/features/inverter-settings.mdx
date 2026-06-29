@@ -1,0 +1,127 @@
+---
+title: Inverter Settings
+description: Full reference for the Inverter screen sections and controls.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+The Inverter screen provides access to device information, diagnostics, and all configurable settings for your inverter or gateway. Sections are collapsible — tap a section header to expand it.
+
+## Overview
+
+| Field | Description |
+|-------|-------------|
+| Product | Device type (e.g. Gateway, All In One, Hybrid GEN3) |
+| Serial | Device serial number |
+| Firmware | Installed firmware version |
+| Status | Current inverter status (e.g. On Grid, Off Grid) |
+| Last Updated | Timestamp of the most recent data read |
+
+## Fault Log
+
+Lists active and historical faults reported by the inverter. Faults can be reviewed and alerts cleared from here. See [Fault Log](/features/fault-log/) for full details.
+
+## Write Log
+
+A timestamped record of every setting written to the inverter from GivLocal. Each entry shows the register address, the value written, and the time. The log can be searched, filtered by date, and exported.
+
+Useful for verifying that changes were applied, or for diagnosing unexpected behaviour after a settings change.
+
+## Live Telemetry
+
+Displays raw register values from the inverter in real time, grouped into categories:
+
+- **PV** — solar input voltages and currents
+- **Grid** — grid voltage, frequency, and power
+- **EPS** — emergency power supply readings
+- **Temperature** — inverter and battery temperature sensors
+
+## Battery Control
+
+| Setting | Description |
+|---------|-------------|
+| Eco Mode | When enabled, the inverter automatically manages charge and discharge based on tariff and usage |
+| Pause Start / End | Time window during which the battery is held at its current SOC |
+| Pause Mode | Whether to pause charging, discharging, or both during the pause window |
+| Battery Reserve | Minimum SOC the inverter will discharge to |
+
+## Power Limits
+
+| Setting | Description |
+|---------|-------------|
+| Active Power Rate | Overall inverter output as a percentage of maximum (%) |
+| Charge Power Limit | Maximum battery charge rate (kW) |
+| Discharge Power Limit | Maximum battery discharge rate (kW) |
+
+<Aside type="tip">
+  If **Use Max Power for Quick Charge/Discharge** is enabled in App Settings, these limits are temporarily overridden when you tap Charge Now or Discharge Now.
+</Aside>
+
+## EMS Controls
+
+Available on EMS devices only.
+
+| Setting | Description |
+|---------|-------------|
+| Export Power Limit | Caps the power exported to the grid |
+| Plant Charge Compensation | Adjusts the target charge power at the plant level |
+| Plant Discharge Compensation | Adjusts the target discharge power at the plant level |
+
+## Clock
+
+Displays and allows correction of the inverter's internal clock. An incorrect clock can cause schedules to run at the wrong time.
+
+## Advanced
+
+**Real-Time Control (RTC)** — enables or disables the inverter's real-time control mode. Only available on supported devices and firmware versions.
+
+<Aside type="caution">
+  Only change RTC mode if you understand its implications. Consult your installer if unsure.
+</Aside>
+
+## Grid Compliance
+
+| Setting | Description |
+|---------|-------------|
+| EPS Mode | Enables Emergency Power Supply (off-grid backup) mode |
+| Zero Second EPS Changeover | Enables near-instantaneous switchover to EPS on grid loss |
+
+<Aside type="caution">
+  EPS settings affect how your system behaves during a power cut. Do not change these without understanding the impact on your installation.
+</Aside>
+
+## Service
+
+Restart options for your hardware. Available options depend on device type:
+
+| Action | Description |
+|--------|-------------|
+| Restart Gateway | Restarts the gateway only |
+| Restart AIOs | Restarts all connected All-In-One units |
+| Restart All | Restarts the gateway and all AIOs |
+| Restart Inverter | Restarts the inverter (non-gateway setups) |
+
+<Aside type="caution">
+  Restarting hardware interrupts monitoring and may briefly affect your system's operation.
+</Aside>
+
+## Installer
+
+A dedicated section for commissioning and service settings intended for qualified installers. Protected separately from everyday user controls.
+
+<Aside type="caution">
+  Incorrect changes in the Installer section can affect system operation. Only access this under instruction from your installer or GivEnergy support.
+</Aside>
+
+## Diagnostics (register reader)
+
+A low-level tool that reads raw register values directly from the inverter by address. Useful for advanced diagnostics or verifying that a value was written correctly.
+
+## Screenshots needed
+- Inverter overview section
+- Write Log screen
+- Live Telemetry screen
+- Battery Control section expanded
+- Power Limits section expanded
+- EMS Controls section (EMS device only)
+- Service section showing restart options

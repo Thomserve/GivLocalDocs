@@ -21,9 +21,9 @@ Animated dots on the lines show the direction and relative speed of power flow.
 
 Below the power flow diagram, three buttons let you immediately:
 
-- **Charge Now** — force the battery to charge from grid or solar
-- **Discharge Now** — force the battery to discharge to home
-- **Pause** — stop charging and discharging
+- **Charge Now** - force the battery to charge from grid or solar
+- **Discharge Now** - force the battery to discharge to home
+- **Pause** - stop charging and discharging
 
 These override any active schedule until cancelled or the next scheduled event.
 
