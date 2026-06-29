@@ -15,9 +15,6 @@ export default defineConfig({
             social: [
                 { icon: 'github', label: 'GitHub', href: 'https://github.com/Thomserve/GivLocalApp' },
             ],
-            editLink: {
-                baseUrl: 'https://github.com/Thomserve/GivLocalApp/edit/main/docs/',
-            },
             sidebar: [
                 {
                     label: 'Getting Started',
